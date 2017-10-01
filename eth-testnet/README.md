@@ -2,6 +2,10 @@
 
 The makefile contained in this directory will help bootstrap a custom testnetwork by creating a genesis block, bootnode, nodes, and a miner. Each node is sandboxed to its own `--datadir` under the nodes folder, so you can run as many nodes as you want. However, ethereum only supports running a single miner on a machine without some extra configuration.
 
+## Prerequisites
+* macOS with Homebrew installed
+* git
+
 ## Setup
 To get started, run:
 
@@ -21,7 +25,7 @@ In a separate terminal window, you can startup the bootnode. The bootnode makes 
 
 The bootnode will now be running in the foreground, so switch over to another terminal window.
 
-## Starting a miner
+## Starting a Miner
 
 In order to run a miner, we need to first initialize a node from a genesis block. Then, we need to create an account for the node before we can point the miner at the account's address. 
 
@@ -38,6 +42,8 @@ If you want to rerun the miner later, you only need to run
 ````
     make miner
 ````
+
+## Starting More Nodes
 
 To run a different node, you can just use `make node` with parameters. Specify a directory for datadir and a port number. If running on a single machine, the port numbers must be different:
 

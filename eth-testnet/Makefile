@@ -1,5 +1,7 @@
 # https://medium.com/@WWWillems/how-to-set-up-a-private-ethereum-testnet-blockchain-using-geth-and-homebrew-1106a27e8e1e
 # https://souptacular.gitbooks.io/ethereum-tutorials-and-tips-by-hudson/content/private-chain.html
+# http://chainskills.com/2017/03/10/part-3-setup-the-private-chain-miners/
+#https://ethereum.stackexchange.com/questions/9701/how-do-i-set-up-2-private-mining-nodes-on-the-same-computer
 SHELL := /bin/bash
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 # all node data
