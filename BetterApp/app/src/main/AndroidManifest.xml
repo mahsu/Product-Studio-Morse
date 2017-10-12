@@ -18,4 +18,9 @@
         </activity>
     </application>
 
+    <uses-feature
+        android:name="android.hardware.fingerprint"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 </manifest>
