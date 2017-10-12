@@ -50,7 +50,7 @@ bootnode:
 
 miner: account-list
 	@echo $(FIRST_ACCOUNT)
-	geth  $(GETH_FLAGS) --bootnodes $(BOOTNODE_ADDR) --datadir $(NODES)/$(TESTNET_DIR) --port 60609 --mine --unlock 0 --password $(NODES)/password --minerthreads=2 --etherbase=0x$(FIRST_ACCOUNT)
+	geth  $(GETH_FLAGS) --bootnodes $(BOOTNODE_ADDR) --datadir $(NODES)/$(TESTNET_DIR) --port 60609 --mine --unlock 0 --password $(NODES)/password --minerthreads=1 --etherbase=0x$(FIRST_ACCOUNT)
 
 remove:
 	geth removedb --datadir $(DATADIR)
