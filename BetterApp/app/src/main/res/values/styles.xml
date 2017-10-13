@@ -11,5 +11,5 @@
 
     <style name="PopupOverlay" parent="Base.ThemeOverlay.AppCompat.Dark" />
 
-    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>
