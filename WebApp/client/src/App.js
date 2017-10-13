@@ -110,14 +110,14 @@ class QRResponseStub extends Component {
   }
 
   render() {
-    return (<a className="btn" onClick={this.sendInfoStub}>Stub QR Response</a>)
+    return (<button className="btn btn-normal" onClick={this.sendInfoStub}>Stub QR Response</button>)
   }
 }
 
 class UserForm extends Component {
   state = {
     customer: {
-      "name": "temp",
+      "name": "",
       "email": "",
       "ssn": "",
       "address": {
@@ -162,24 +162,24 @@ class UserForm extends Component {
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="inputPassword4" className="col-form-label">Name</label>
-            <input type="text" className="form-control" id="inputPassword4" placeholder="Name" value={this.state.customer.name} />
+            <input type="text" className="form-control" id="inputPassword4" value={this.state.customer.name} />
           </div>
           <div className="form-group col-md-6">
             <label htmlFor="inputEmail4" className="col-form-label">Email</label>
-            <input type="email" className="form-control" id="inputEmail4" placeholder="Email" value={this.state.customer.email} />
+            <input type="email" className="form-control" id="inputEmail4" value={this.state.customer.email} />
           </div>
         </div>
         <div className="form-group">
           <label htmlFor="inputSSN" className="col-form-label">SSN</label>
-          <input type="text" className="form-control" id="inputSSN" placeholder="SSN" value={this.state.customer.email} />
+          <input type="text" className="form-control" id="inputSSN" value={this.state.customer.ssn} />
         </div>
         <div className="form-group">
           <label htmlFor="inputAddress" className="col-form-label">Address</label>
-          <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" value={this.state.customer.address.lineOne} />
+          <input type="text" className="form-control" id="inputAddress" value={this.state.customer.address.lineOne} />
         </div>
         <div className="form-group">
           <label htmlFor="inputAddress2" className="col-form-label">Address 2</label>
-          <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" value={this.state.customer.address.lineTwo} />
+          <input type="text" className="form-control" id="inputAddress2" value={this.state.customer.address.lineTwo} />
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
