@@ -7,9 +7,11 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -51,15 +53,18 @@ public class MainActivity extends AppCompatActivity {
     private FingerprintManager.CryptoObject cryptoObject;
     private FingerprintManager fingerprintManager;
     private KeyguardManager keyguardManager;
+
     private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         // verify device API if minimum is set lower than 23
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
             keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
             fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
 
@@ -88,11 +93,18 @@ public class MainActivity extends AppCompatActivity {
                 if (initCipher()) {
                     cryptoObject = new FingerprintManager.CryptoObject(cipher);
 
-                    FingerprintHandler helper = new FingerprintHandler(this);
-                    helper.startAuth(fingerprintManager, cryptoObject);
+                    // old authentication system
+                    //FingerprintHandler helper = new FingerprintHandler(this);
+                    //helper.startAuth(fingerprintManager, cryptoObject);
                 }
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        authenticate();
     }
 
     /**
@@ -233,6 +245,28 @@ public class MainActivity extends AppCompatActivity {
                 | UnrecoverableKeyException | IOException
                 | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException("Failed to init Cipher", e);
+        }
+    }
+
+    /**
+     * Proceed the purchase operation
+     *
+     * @param withFingerprint {@code true} if the authentication was made by using a fingerprint
+     * @param cryptoObject the Crypto object
+     */
+    public void onAuthenticated(boolean withFingerprint,
+                            @Nullable FingerprintManager.CryptoObject cryptoObject) {
+        if (withFingerprint) {
+            // If the user has authenticated with fingerprint, verify that using cryptography and
+            // then show the confirmation message.
+            assert cryptoObject != null;
+            tryEncrypt(cryptoObject.getCipher());
+            Toast.makeText(this, "Fingerprint success!", Toast.LENGTH_LONG).show();
+        } else {
+            // Authentication happened with backup password. Just show the confirmation message.
+            //TODO something here
+            Toast.makeText(this, "Password success!", Toast.LENGTH_LONG).show();
+            //showConfirmation(null);
         }
     }
 
