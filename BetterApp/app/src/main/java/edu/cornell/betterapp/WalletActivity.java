@@ -1,11 +1,13 @@
 package edu.cornell.betterapp;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -27,9 +29,21 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import edu.cornell.betterapp.dummy.DummyContent;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class WalletActivity extends AppCompatActivity implements AccountFragment.OnListFragmentInteractionListener{
+import edu.cornell.betterapp.dummy.DummyContent;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+
+public class WalletActivity extends AppCompatActivity implements AccountFragment.OnListFragmentInteractionListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -47,6 +61,13 @@ public class WalletActivity extends AppCompatActivity implements AccountFragment
     private ViewPager mViewPager;
 
     public final static String TAG = WalletActivity.class.getSimpleName();
+    public static OkHttpClient client = new OkHttpClient();
+    public static final MediaType JSON
+            = MediaType.parse("application/json");
+
+    public static String url = "http://6be151e8.ngrok.io/sendInfo";
+
+    AccountFragment accountFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +95,10 @@ public class WalletActivity extends AppCompatActivity implements AccountFragment
             public void onClick(View view) {
                 new IntentIntegrator(self)
                         .setOrientationLocked(false)
+                        .setDesiredBarcodeFormats(new ArrayList<>(Arrays.asList("QR_CODE")))
                         .initiateScan();
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -105,15 +127,83 @@ public class WalletActivity extends AppCompatActivity implements AccountFragment
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean sendPersonalInformation() throws IOException {
+
+        String json = "{\"customer\":{\"name\":\"John Doe\",\"email\":\"jdoe@cornell.edu\",\"ssn\":\"123-45-6789\",\"address\":{\"lineOne\":\"2 West Loop Rd\",\"lineTwo\":\"#123\",\"city\":\"New York\",\"state\":\"NY\",\"zip\":\"10003\"}}}";
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .url(url)//url)
+                .post(body)
+                //.get()
+                .build();
+        client.newCall(request).enqueue(
+                new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            throw new IOException("Unexpected code " + response);
+                        } else {
+                            Log.i(TAG,"RECEIVED RESPONSE");
+                            String resBody = response.body().string();
+                            DummyContent.createDummyItem();
+                            WalletActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (accountFragment != null) {
+                                        accountFragment.updateContent();
+                                        Log.e(TAG, "Update content");
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                });
+        return true;
+    }
+
     // Get the results:
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
+                Log.e(TAG, "Scanned: " + result.getContents());
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+                builder1.setMessage("Bank is requesting your personal information.");
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Allow",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                try {
+                                    sendPersonalInformation();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                dialog.cancel();
+                            }
+                        });
+
+                builder1.setNegativeButton(
+                        "Deny",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -177,9 +267,10 @@ public class WalletActivity extends AppCompatActivity implements AccountFragment
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0:
-                    return AccountFragment.newInstance(1);
+                    accountFragment = AccountFragment.newInstance(1);
+                    return accountFragment;
                 default:
-                    return PlaceholderFragment.newInstance(position+1);
+                    return PlaceholderFragment.newInstance(position + 1);
             }
 
         }
