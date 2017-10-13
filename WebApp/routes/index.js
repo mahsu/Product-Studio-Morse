@@ -18,7 +18,6 @@ router.post('/sendInfo', function(req, res, next) {
 	fs.writeFile(fileName, contents, function(err) {
 	    if(err) {
 	    	console.log(err);
-	        return console.log(err);
 	    }
 
 	    console.log("The file was saved!");
@@ -35,7 +34,6 @@ router.get('/getInfo', function(req, res, next) {
 		var fileName;
 
 		files.forEach(file => {
-			console.log(file, startDate);
 			// Was the file created after the requested timestamp?
 			if(startDate < Number(file.split('.')[0]))
 				fileName = file;
