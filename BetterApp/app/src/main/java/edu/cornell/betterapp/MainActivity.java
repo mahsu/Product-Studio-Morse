@@ -1,6 +1,8 @@
 package edu.cornell.betterapp;
 
+import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
@@ -39,7 +41,7 @@ import javax.crypto.SecretKey;
 
 import edu.cornell.betterapp.lib.FingerprintHandler;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("Please enable lockscreen security in your device's Settings");
             } else {
                 try {
-                    generateKey(KEY_NAME,true);
+                    generateKey(KEY_NAME, true);
                 } catch (FingerprintException e) {
                     e.printStackTrace();
                 }
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
      * Creates a symmetric key in the Android Key Store which can only be used after the user has
      * authenticated with fingerprint.
      *
-     * @param keyName the name of the key to be created
+     * @param keyName                          the name of the key to be created
      * @param invalidatedByBiometricEnrollment if {@code false} is passed, the created key will not
      *                                         be invalidated even if a new fingerprint is enrolled.
      *                                         The default value is {@code true}, so passing
@@ -119,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
      *                                         (the key will be invalidated if a new fingerprint is
      *                                         enrolled.). Note that this parameter is only valid if
      *                                         the app works on Android N developer preview.
-     *
      */
     public void generateKey(String keyName, boolean invalidatedByBiometricEnrollment) throws FingerprintException {
         // The enrolling flow for fingerprint. This is where you ask the user to set up fingerprint
@@ -163,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
                 | InvalidAlgorithmParameterException
                 | CertificateException
                 | IOException e) {
-                e.printStackTrace();
-                throw new FingerprintException(e);
+            e.printStackTrace();
+            throw new FingerprintException(e);
         }
     }
 
@@ -252,10 +253,10 @@ public class MainActivity extends AppCompatActivity {
      * Proceed the purchase operation
      *
      * @param withFingerprint {@code true} if the authentication was made by using a fingerprint
-     * @param cryptoObject the Crypto object
+     * @param cryptoObject    the Crypto object
      */
     public void onAuthenticated(boolean withFingerprint,
-                            @Nullable FingerprintManager.CryptoObject cryptoObject) {
+                                @Nullable FingerprintManager.CryptoObject cryptoObject) {
         if (withFingerprint) {
             // If the user has authenticated with fingerprint, verify that using cryptography and
             // then show the confirmation message.
@@ -268,6 +269,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Password success!", Toast.LENGTH_LONG).show();
             //showConfirmation(null);
         }
+
+        Intent intent = new Intent(this, WalletActivity.class);
+        startActivity(intent);
     }
 
     public static class FingerprintException extends Exception {

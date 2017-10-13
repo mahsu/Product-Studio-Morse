@@ -1,5 +1,5 @@
 <resources>
-<!--
+    <!--
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 -->
+
+    <style name="PopupOverlay" parent="Base.ThemeOverlay.AppCompat.Dark" />
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>
