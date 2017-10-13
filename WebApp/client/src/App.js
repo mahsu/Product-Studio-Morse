@@ -35,7 +35,7 @@ class AppHeader extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a className="navbar-brand" href="#">Betterment Client Onboarding</a>
+        <a className="navbar-brand" href="#">Bank of CT Onboarding</a>
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
