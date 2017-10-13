@@ -60,5 +60,6 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.5.0'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
     testCompile 'junit:junit:4.12'
 }

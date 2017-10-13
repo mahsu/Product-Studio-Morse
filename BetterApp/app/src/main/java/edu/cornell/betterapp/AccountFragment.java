@@ -30,6 +30,7 @@ public class AccountFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     public static final String TAG = AccountFragment.class.getSimpleName();
+    public RecyclerView.Adapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -75,9 +76,16 @@ public class AccountFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyAccountRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            adapter = new MyAccountRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+            recyclerView.setAdapter(adapter);
         }
         return view;
+    }
+
+    public void updateContent() {
+        if (adapter != null)  {
+            adapter.notifyDataSetChanged();
+        }
     }
 
 
