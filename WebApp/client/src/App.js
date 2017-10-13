@@ -59,7 +59,7 @@ class NewCustomerQR extends Component {
   };
 
   componentDidMount() {
-    fetch('/getTx')
+    /*fetch('/getTx')
       .then(response => response.text())
       .then(info => this.setState({
         qrValue: info,
@@ -67,7 +67,7 @@ class NewCustomerQR extends Component {
         qrCodeIsShowing: true
       })).then(function() {
         console.log(this.state.qrValue);
-      }.bind(this))
+      }.bind(this))*/
   }
 
   render() {

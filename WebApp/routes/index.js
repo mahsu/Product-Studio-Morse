@@ -26,27 +26,34 @@ router.post('/sendInfo', function(req, res, next) {
 })
 
 router.get('/getInfo', function(req, res, next) {
-	console.log(req);
+	var startDate = Number(req.query.startDate);
 	var directoryName = path.resolve(__dirname, 'tmp');
 
 	fs.readdir(directoryName, (err, files) => {
-		var customer;
+		var fileName;
 
-		/*files.forEach(file => {
-			// Was the file created after I loaded the pag?
-			if(req.pageLoadTime < Number(file.split('.')[0]))
-				/*fs.readFile(fileName, 'utf8', function (err, data) {
-					if (err) {
-						console.log(err);
+		files.forEach(file => {
+			console.log(file, startDate);
+			// Was the file created after the requested timestamp?
+			if(startDate < Number(file.split('.')[0]))
+				fileName = file;
+		});
 
-						res.json({"error": "Customer not found"});
-					} else {
-			  			res.json(JSON.parse(data));
-					}
-				});
+		if(fileName)
+			fs.readFile(path.resolve(__dirname, 'tmp/'+fileName), 'utf8', function (err, data) {
+				if (err) {
+					console.log(err);
 
-		});*/
-	})
+					res.json({"error": "Customer not found"});
+				} else {
+		  			res.json(JSON.parse(data));
+				}
+
+				respSent = true;
+			});
+		else 
+			res.json({"error": "Customer not found"});
+	});
 
 
 })
