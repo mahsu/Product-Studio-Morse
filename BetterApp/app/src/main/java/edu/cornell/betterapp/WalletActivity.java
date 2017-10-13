@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +27,9 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class WalletActivity extends AppCompatActivity {
+import edu.cornell.betterapp.dummy.DummyContent;
+
+public class WalletActivity extends AppCompatActivity implements AccountFragment.OnListFragmentInteractionListener{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -42,6 +45,8 @@ public class WalletActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+
+    public final static String TAG = WalletActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +120,12 @@ public class WalletActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        //TODO
+        Log.i(TAG, "Clicked on list item");
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -164,8 +175,12 @@ public class WalletActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return AccountFragment.newInstance(1);
+                default:
+                    return PlaceholderFragment.newInstance(position+1);
+            }
 
         }
 

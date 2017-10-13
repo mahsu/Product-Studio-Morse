@@ -29,7 +29,7 @@
         <activity
             android:name=".WalletActivity"
             android:label="@string/title_activity_wallet"
-            android:theme="@style/Base.Theme.AppCompat.Light"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"

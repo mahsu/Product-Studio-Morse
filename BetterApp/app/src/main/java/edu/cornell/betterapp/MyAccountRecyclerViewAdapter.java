@@ -65,8 +65,8 @@ public class MyAccountRecyclerViewAdapter extends RecyclerView.Adapter<MyAccount
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mIdView = (TextView) view.findViewById(R.id.accountName);
+            mContentView = (TextView) view.findViewById(R.id.accountDetails);
         }
 
         @Override

@@ -6,20 +6,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/headerAccounts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:text="TextView"
+        android:text="My Accounts"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:text="My Accounts" />
 
     <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/list"
+        android:id="@+id/listAccounts"
         android:name="edu.cornell.betterapp.AccountFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

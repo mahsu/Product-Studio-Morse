@@ -2,10 +2,11 @@ package edu.cornell.betterapp;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class AccountFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    public static final String TAG = AccountFragment.class.getSimpleName();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -60,10 +62,14 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_list, container, false);
 
+        View accountList = view.findViewById(R.id.listAccounts);
+
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        Log.e(TAG,"on create view");
+        if (accountList instanceof RecyclerView) {
+            Log.e(TAG,"Instance of recyclerview");
+            Context context = accountList.getContext();
+            RecyclerView recyclerView = (RecyclerView) accountList;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

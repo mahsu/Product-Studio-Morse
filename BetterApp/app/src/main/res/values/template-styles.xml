@@ -24,6 +24,16 @@
 
     <style name="AppTheme" parent="Theme.Sample" />
     -->
+
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light">
+
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
     <!-- Widget styling -->
 
     <style name="Widget" />
