@@ -19,6 +19,7 @@ class App extends Component {
             <div className="row">
               <div className="col-4">
                 <NewCustomerQR />
+                <QRResponseStub />
               </div>
               <div className="col-8">
                 <UserForm />
@@ -80,6 +81,35 @@ class NewCustomerQR extends Component {
   }
 }
 
+class QRResponseStub extends Component {
+  sendInfoStub() {
+    fetch('/sendInfo', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "customer": {
+          "name": "John Doe",
+          "email": "jdoe@cornell.edu",
+          "ssn": "123-45-6789",
+          "address": {
+            "lineOne": "2 West Loop Rd",
+            "lineTwo": "#123",
+            "city": "New York",
+            "state": "NY",
+            "zip": "10003"
+          }
+        }
+      })
+    })
+  }
+
+  render() {
+    return (<a className="btn" onClick={this.sendInfoStub}>Stub QR Response</a>)
+  }
+}
+
 class UserForm extends Component {
   state = {
     customer: {
@@ -117,19 +147,7 @@ class UserForm extends Component {
       }.bind(this))
   }
 
-  sendInfoStub() {
-    fetch('/sendInfo', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({a: 7, str: 'Some string: &=&'})
-    })
-  }
-
   componentDidMount() {
-    //this.sendInfoStub();
-
     this.getCustomerInfo()
   }
 
@@ -173,6 +191,7 @@ class UserForm extends Component {
             <input type="text" className="form-control" id="inputZip" value={this.state.customer.address.zip} />
           </div>
         </div>
+        
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
     )

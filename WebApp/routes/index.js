@@ -22,6 +22,8 @@ router.post('/sendInfo', function(req, res, next) {
 	    }
 
 	    console.log("The file was saved!");
+
+	    res.json({"success": 1})
 	}); 
 })
 
