@@ -160,44 +160,33 @@ class UserForm extends Component {
     return (
       <form>
         <div className="form-row">
-          <div className="form-group col-md-6">
-            <label className="col-form-label">Name</label>
-            <input type="text" className="form-control" value={this.state.customer.name} />
-          </div>
-          <div className="form-group col-md-6">
-            <label className="col-form-label">Email</label>
-            <input type="email" className="form-control" value={this.state.customer.email} />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-form-label">SSN</label>
-          <input type="text" className="form-control" value={this.state.customer.ssn} />
-        </div>
-        <div className="form-group">
-          <label className="col-form-label">Address</label>
-          <input type="text" className="form-control" value={this.state.customer.address.lineOne} />
-        </div>
-        <div className="form-group">
-          <label className="col-form-label">Address 2</label>
-          <input type="text" className="form-control" value={this.state.customer.address.lineTwo} />
-        </div>
-        <div className="form-row">
-          <div className="form-group col-md-6">
-            <label className="col-form-label">City</label>
-            <input type="text" className="form-control" value={this.state.customer.address.city} />
-          </div>
-          <div className="form-group col-md-4">
-            <label className="col-form-label">State</label>
-            <input id="inputState" className="form-control" value={this.state.customer.address.state} />
-          </div>
-          <div className="form-group col-md-2">
-            <label className="col-form-label">Zip</label>
-            <input type="text" className="form-control" value={this.state.customer.address.zip} />
-          </div>
+          <FormGroupInput value={this.state.customer.name} label="Name" size='6' />
+          <FormGroupInput value={this.state.customer.email} label="Email" size='6' />
         </div>
         
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <FormGroupInput value={this.state.customer.ssn} label="SSN" />
+        <FormGroupInput value={this.state.customer.address.lineOne} label="Address" />
+        <FormGroupInput value={this.state.customer.address.lineTwo} label="Address (Line 2)" />
+
+        <div className="form-row">
+          <FormGroupInput value={this.state.customer.address.city} label="City" size='6' />
+          <FormGroupInput value={this.state.customer.address.state} label="State" size='4' />
+          <FormGroupInput value={this.state.customer.address.zip} label="Zip" size='2' />
+        </div>
+        
+        {/*<button type="submit" className="btn btn-primary">Submit</button>*/}
       </form>
+    )
+  }
+}
+
+class FormGroupInput extends Component {
+  render() {
+    return (
+        <div className={"form-group "+ ((this.props.size) ? "col-md-"+this.props.size : '')}>
+          <label className="col-form-label">{this.props.label}</label>
+          <input type="text" className="form-control" value={this.props.value} />
+        </div>
     )
   }
 }
