@@ -9,15 +9,20 @@ router.get('/', function(req, res, next) {
 
   var txId = Math.floor((Math.random()*100000000000));
 
-  // This function creates a 2048-bit strong RSA key pair in PEM format.
-  crypto2.createKeyPair((err, txPrivKey, txPubKey) => {
-	var tuple = txId+','+txPubKey;
+  var txPrivKey = 'thisismyprivatekey';
+  var txPubKey = 'thisismypublickey'
 
-	// AES 256 CBC encryption algorithm
-	crypto2.encrypt(tuple, privateKey, (err, encrypted) => {
-		res.send(encrypted);
-	});
-  });
+  // This function creates a 2048-bit strong RSA key pair in PEM format.
+  //crypto2.createKeyPair((err, txPrivKey, txPubKey) => {
+  	var tuple = txId+','+txPubKey;
+
+  	// AES 256 CBC encryption algorithm
+  	crypto2.encrypt(tuple, privateKey, (err, encrypted) => {
+      var b64 = new Buffer(encrypted).toString('base64');
+  		
+      res.send(b64);
+  	});
+  //});
 });
 
 module.exports = router;
