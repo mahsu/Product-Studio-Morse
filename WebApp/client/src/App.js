@@ -35,7 +35,7 @@ class AppHeader extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a className="navbar-brand" href="#">Betterment Client Onboarding</a>
+        <a className="navbar-brand" href="#">Bank of CT Onboarding</a>
 
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
@@ -110,14 +110,14 @@ class QRResponseStub extends Component {
   }
 
   render() {
-    return (<a className="btn" onClick={this.sendInfoStub}>Stub QR Response</a>)
+    return (<button className="btn btn-normal" onClick={this.sendInfoStub}>Stub QR Response</button>)
   }
 }
 
 class UserForm extends Component {
   state = {
     customer: {
-      "name": "temp",
+      "name": "",
       "email": "",
       "ssn": "",
       "address": {
@@ -132,7 +132,7 @@ class UserForm extends Component {
   };
 
   getCustomerInfo() {
-    fetch('/getInfo?startDate='+this.state.pageLoadTime)
+    fetch('/getInfo?startDate='+String(this.state.pageLoadTime))
       .then(resp => resp.json())
       .then(function(data) {
         // If we have a customer, set the customer state so it populates in the text fields
@@ -161,38 +161,38 @@ class UserForm extends Component {
       <form>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="inputPassword4" className="col-form-label">Name</label>
-            <input type="text" className="form-control" id="inputPassword4" placeholder="Name" value={this.state.customer.name} />
+            <label className="col-form-label">Name</label>
+            <input type="text" className="form-control" value={this.state.customer.name} />
           </div>
           <div className="form-group col-md-6">
-            <label htmlFor="inputEmail4" className="col-form-label">Email</label>
-            <input type="email" className="form-control" id="inputEmail4" placeholder="Email" value={this.state.customer.email} />
+            <label className="col-form-label">Email</label>
+            <input type="email" className="form-control" value={this.state.customer.email} />
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="inputSSN" className="col-form-label">SSN</label>
-          <input type="text" className="form-control" id="inputSSN" placeholder="SSN" value={this.state.customer.email} />
+          <label className="col-form-label">SSN</label>
+          <input type="text" className="form-control" value={this.state.customer.ssn} />
         </div>
         <div className="form-group">
-          <label htmlFor="inputAddress" className="col-form-label">Address</label>
-          <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" value={this.state.customer.address.lineOne} />
+          <label className="col-form-label">Address</label>
+          <input type="text" className="form-control" value={this.state.customer.address.lineOne} />
         </div>
         <div className="form-group">
-          <label htmlFor="inputAddress2" className="col-form-label">Address 2</label>
-          <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" value={this.state.customer.address.lineTwo} />
+          <label className="col-form-label">Address 2</label>
+          <input type="text" className="form-control" value={this.state.customer.address.lineTwo} />
         </div>
         <div className="form-row">
           <div className="form-group col-md-6">
-            <label htmlFor="inputCity" className="col-form-label">City</label>
-            <input type="text" className="form-control" id="inputCity" value={this.state.customer.address.city} />
+            <label className="col-form-label">City</label>
+            <input type="text" className="form-control" value={this.state.customer.address.city} />
           </div>
           <div className="form-group col-md-4">
-            <label htmlFor="inputState" className="col-form-label">State</label>
+            <label className="col-form-label">State</label>
             <input id="inputState" className="form-control" value={this.state.customer.address.state} />
           </div>
           <div className="form-group col-md-2">
-            <label htmlFor="inputZip" className="col-form-label">Zip</label>
-            <input type="text" className="form-control" id="inputZip" value={this.state.customer.address.zip} />
+            <label className="col-form-label">Zip</label>
+            <input type="text" className="form-control" value={this.state.customer.address.zip} />
           </div>
         </div>
         
