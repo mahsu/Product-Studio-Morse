@@ -150,18 +150,18 @@ public class WalletActivity extends AppCompatActivity implements AccountFragment
                         } else {
                             Log.i(TAG,"RECEIVED RESPONSE");
                             String resBody = response.body().string();
-                            DummyContent.createDummyItem();
-                            WalletActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (accountFragment != null) {
-                                        accountFragment.updateContent();
-                                        Log.e(TAG, "Update content");
-                                    }
-                                }
-                            });
-
                         }
+
+                        DummyContent.createDummyItem();
+                        WalletActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (accountFragment != null) {
+                                    accountFragment.updateContent();
+                                    Log.e(TAG, "Update content");
+                                }
+                            }
+                        });
                     }
                 });
         return true;
