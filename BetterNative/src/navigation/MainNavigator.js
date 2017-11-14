@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import Signin from "../Signin.js";
+import Signin from "../screens/Signin.js";
+import Notifications from "../screens/Notifications.js";
 
 import { StackNavigator } from "react-navigation";
 
 const AppNavigator = StackNavigator(
     {
-        Signin: { screen: Signin }
+        Signin: { screen: Signin },
+        Notifications: {screen: Notifications}
     },
     {
         initialRouteName: "Signin",

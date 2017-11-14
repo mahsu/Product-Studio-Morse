@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Root, Container, Header, Content, Form, Item, Input} from "native-base";
 import Expo from "expo";
-import AppNavigator from "./src/HomeScreen/index.js";
+import AppNavigator from "./src/navigation/MainNavigator.js";
+import SidebarNavigator from "./src/navigation/SidebarNavigator.js";
 
 
 
@@ -12,8 +13,14 @@ export default class App extends React.Component {
         super(props);
 
         this.state = {
-            fontsAreLoaded: false
+            fontsAreLoaded: false,
+            authenticated: true
         }
+    }
+
+    authenticate() {
+        //todo set state to authenticated
+        return;
     }
 
     async componentWillMount() {
@@ -29,11 +36,20 @@ export default class App extends React.Component {
         if (!this.state.fontsAreLoaded) {
             return <Expo.AppLoading/>;
         }
+        if (!this.state.authenticated) {
+            return (
+                <Root>
+                    <AppNavigator/>
+                </Root>
+            );
+        }
+
         return (
             <Root>
-                <AppNavigator/>
+                <SidebarNavigator/>
             </Root>
-        );
+        )
+
     }
 }
 

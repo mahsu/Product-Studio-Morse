@@ -3,10 +3,23 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Button, Container, Header, Content, Form, Item, Input, Left, Icon, Body, Right, Title} from "native-base";
 
 
-export default class Signin extends React.Component {
-    static navigationOptions = {
-        title: 'Home',
-    }
+export default class Settings extends React.Component {
+
+    static navigationOptions = ({navigation}) => ({
+        header: (
+            <Header>
+                <Left>
+                    <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
+                        <Icon name="menu"/>
+                    </Button>
+                </Left>
+                <Body>
+                <Title>Signin</Title>
+                </Body>
+                <Right/>
+            </Header>
+        )
+    });
 
     constructor(props) {
         super(props);
@@ -24,7 +37,8 @@ export default class Signin extends React.Component {
                             <Input placeholder="Password"/>
                         </Item>
                     </Form>
-                    <Button block primary onPress={() => this.props.navigation.navigate('Profile', {name: 'Lucy'})}>
+                    <Button block primary
+                            onPress={() => this.props.navigation.navigate('Notifications', {name: 'Lucy'})}>
                         <Text>Login</Text>
                     </Button>
                 </Content>
@@ -33,18 +47,4 @@ export default class Signin extends React.Component {
     }
 }
 
-Signin.navigationOptions = ({ navigation }) => ({
-    header: (
-        <Header>
-            <Left>
-                <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
-                    <Icon name="menu" />
-                </Button>
-            </Left>
-            <Body>
-            <Title>Signin</Title>
-            </Body>
-            <Right />
-        </Header>
-    )
-});
+
