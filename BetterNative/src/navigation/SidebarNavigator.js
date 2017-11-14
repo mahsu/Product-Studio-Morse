@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
                 <Content>
                     <Image
                         source={{
-                            uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/drawer-cover.png"
+                            uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/drawer-cover.png?raw=true"
                         }}
                         style={{
                             height: 120,
@@ -30,7 +30,7 @@ class Sidebar extends React.Component {
                             square
                             style={{height: 80, width: 70}}
                             source={{
-                                uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/logo.png"
+                                uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/logo.png?raw=true"
                             }}
                         />
                     </Image>

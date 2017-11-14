@@ -14,7 +14,7 @@ export default class App extends React.Component {
 
         this.state = {
             fontsAreLoaded: false,
-            authenticated: true
+            authenticated: false
         }
     }
 
