@@ -7,11 +7,12 @@ import Wallet from "../screens/Wallet.js";
 import Profile from "../screens/Profile.js";
 import Settings from "../screens/Settings.js";
 
-import { DrawerNavigator } from "react-navigation";
+import { DrawerNavigator, StackNavigator } from "react-navigation";
 
 const routes = ["Notifications", "Authorizations", "Wallet", "Profile", "Settings"/*, "Logout"*/];
 
 class Sidebar extends React.Component {
+
     render() {
         return (
             <Container>
@@ -52,13 +53,33 @@ class Sidebar extends React.Component {
     }
 }
 
+const NotificationsNavigator = StackNavigator({
+    Notifications: {screen: Notifications}
+});
+
+const AuthorizationsNavigator = StackNavigator({
+    Authorizations: {screen: Authorizations}
+});
+
+const WalletNavigator = StackNavigator({
+    Wallet: {screen: Wallet}
+});
+
+const ProfileNavigator = StackNavigator({
+    Profile: {screen: Profile}
+});
+
+const SettingsNavigator = StackNavigator({
+    Settings: {screen: Settings}
+});
+
 const SidebarNavigator = DrawerNavigator(
     {
-        Notifications: {screen: Notifications},
-        Authorizations: {screen: Authorizations},
-        Wallet: {screen: Wallet},
-        Profile: {screen: Profile},
-        Settings: {screen: Profile},
+        Notifications: {screen: NotificationsNavigator},
+        Authorizations: {screen: AuthorizationsNavigator},
+        Wallet: {screen: WalletNavigator},
+        Profile: {screen: ProfileNavigator},
+        Settings: {screen: SettingsNavigator},
         //Logout: {screen: Logout}
     },
     {

@@ -8,11 +8,12 @@ import SidebarNavigator from "./SidebarNavigator";
 const AppNavigator = StackNavigator(
     {
         Drawer: {screen: SidebarNavigator},
-        Signin: { screen: Signin },
         Notifications: {screen: Notifications}
     },
     {
         initialRouteName: "Drawer",
+        headerMode: "none",
+
     }
 );
 

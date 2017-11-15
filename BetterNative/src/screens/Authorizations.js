@@ -14,7 +14,7 @@ export default class Authorizations extends React.Component {
                     </Button>
                 </Left>
                 <Body>
-                <Title>Signin</Title>
+                <Title>Authorizations</Title>
                 </Body>
                 <Right/>
             </Header>
@@ -30,15 +30,13 @@ export default class Authorizations extends React.Component {
             <Container>
                 <Content>
                     <Form>
-                        <Item>
-                            <Input placeholder="Username"/>
-                        </Item>
+
                         <Item last>
                             <Input placeholder="Password"/>
                         </Item>
                     </Form>
                     <Button block primary
-                            onPress={() => this.props.navigation.navigate('Notifications', {name: 'Lucy'})}>
+                            onPress={() => this.props.navigation.navigate('Authorizations', {name: 'Lucy'})}>
                         <Text>Login</Text>
                     </Button>
                 </Content>

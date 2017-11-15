@@ -14,7 +14,7 @@ export default class Settings extends React.Component {
                     </Button>
                 </Left>
                 <Body>
-                <Title>Signin</Title>
+                <Title>Settings</Title>
                 </Body>
                 <Right/>
             </Header>
@@ -38,7 +38,7 @@ export default class Settings extends React.Component {
                         </Item>
                     </Form>
                     <Button block primary
-                            onPress={() => this.props.navigation.navigate('Notifications', {name: 'Lucy'})}>
+                            onPress={() => this.props.navigation.navigate('Settings', {name: 'Lucy'})}>
                         <Text>Login</Text>
                     </Button>
                 </Content>

@@ -7,11 +7,10 @@ import {createStore} from 'redux';
 import AppNavigator from "./src/navigation/AppNavigator.js";
 import SidebarNavigator from "./src/navigation/SidebarNavigator.js";
 import identityApp from "./src/redux/reducers";
-import Signin from "./src/screens/Signin";
 
 let store = createStore(identityApp);
 
-export default class App extends React.Component {
+class AppContainer extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,38 +21,18 @@ export default class App extends React.Component {
         }
     }
 
-    authenticate = (val) => {
+    authenticate() {
         //todo set state to authenticated
-
-        this.setState({
-            authenticated: true
-        });
-
         return;
-    };
-
-    unauthenticate = () => {
-        return;
-    };
-
-    async componentWillMount() {
-        await Expo.Font.loadAsync({
-            'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
-            'Roboto': require('native-base/Fonts/Roboto.ttf'),
-            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-        });
-        this.setState({fontsAreLoaded: true});
     }
 
     render() {
-        if (!this.state.fontsAreLoaded) {
-            return <Expo.AppLoading/>;
-        }
+
         if (!this.state.authenticated) {
             return (
                 <Provider store={store}>
                     <Root>
-                        <Signin onLoginSubmit={this.authenticate} value={'123'}/>
+                        <AppNavigator/>
                     </Root>
                 </Provider>
             );
@@ -62,13 +41,35 @@ export default class App extends React.Component {
         return (
             <Provider store={store}>
                 <Root>
-                    <AppNavigator/>
+                    <SidebarNavigator/>
                 </Root>
             </Provider>
         )
 
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        active: ownProps.filter === state.visibilityFilter
+    }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onClick: () => {
+            dispatch(setVisibilityFilter(ownProps.filter))
+        }
+    }
+};
+
+const ConnectedApp = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AppContainer);
+
+export default ConnectedApp;
+
 
 const styles = StyleSheet.create({
     container: {
