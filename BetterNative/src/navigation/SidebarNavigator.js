@@ -8,10 +8,11 @@ import Wallet from "../screens/Wallet.js";
 import Profile from "../screens/Profile.js";
 import Settings from "../screens/Settings.js";
 import AddIdentity from "../screens/AddIdentity.js";
+import CameraTest from  "../screens/CameraTest";
 
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 
-const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings"/*, "Logout"*/];
+const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings","CameraTest"/*, "Logout"*/];
 
 class Sidebar extends React.Component {
 
@@ -87,6 +88,7 @@ const SidebarNavigator = DrawerNavigator(
         Wallet: {screen: WalletNavigator},
         Profile: {screen: ProfileNavigator},
         Settings: {screen: SettingsNavigator},
+        CameraTest: {screen: CameraTest}
         //Logout: {screen: Logout}
     },
     {
