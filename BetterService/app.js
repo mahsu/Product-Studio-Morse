@@ -13,7 +13,7 @@ var auth = require('./routes/auth');
 var identity = require('./routes/identity');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/api-auth');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/api-auth');
 
 var app = express();
 
