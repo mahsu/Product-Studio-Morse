@@ -16,11 +16,11 @@ import {DrawerNavigator, StackNavigator} from "react-navigation";
 
 const routes = [
     {
-        "name": "Authorizations",
+        "name": "Notifications",
         "icon": "ios-notifications"
     },
     {
-        "name": "Wallet",
+        "name": "Authorizations",
         "icon": "ios-card"
     },
     {
@@ -93,7 +93,8 @@ const NotificationsNavigator = StackNavigator({
 
 const AuthorizationsNavigator = StackNavigator({
     Authorizations: {screen: Authorizations},
-    AuthorizationScanner: {screen: AuthorizationScanner}
+    AuthorizationScanner: {screen: AuthorizationScanner},
+    NewAuthorization: {screen: NewAuthorization}
 });
 
 const NewAuthorizationNavigator = StackNavigator({
