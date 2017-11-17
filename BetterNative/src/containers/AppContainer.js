@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Root, Container, Header, Content, Form, Item, Input} from "native-base";
-import Expo from "expo";
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import AppNavigator from "./src/navigation/AppNavigator.js";

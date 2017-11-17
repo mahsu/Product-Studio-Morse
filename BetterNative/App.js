@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Root, Container, Header, Content, Form, Item, Input} from "native-base";
-import Expo from "expo";
+//import Expo from "expo";
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import AppNavigator from "./src/navigation/AppNavigator.js";
@@ -78,17 +78,17 @@ export default class App extends React.Component {
 
     async componentWillMount() {
         await this.initUserStore();
-        await Expo.Font.loadAsync({
+        /*await Expo.Font.loadAsync({
             'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
             'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-        });
+        });*/
         this.setState({fontsAreLoaded: true});
     }
 
     render() {
         if (!this.state.fontsAreLoaded) {
-            return <Expo.AppLoading/>;
+            return <View><Text>Loading</Text></View>;
         }
         if (!this.state.authenticated) {
             return (
