@@ -9,13 +9,17 @@ export default class Authorizations extends React.Component {
             <Header>
                 <Left>
                     <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
-                        <Icon name="menu"/>
+                        <Icon name="menu" />
                     </Button>
                 </Left>
                 <Body>
                     <Title>Authorizations</Title>
                 </Body>
-                <Right/>
+                <Right>
+                    <Button transparent>
+                        <Icon name="ios-barcode-outline" />
+                    </Button>
+                </Right>
             </Header>
         )
     });
