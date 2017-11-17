@@ -21,7 +21,7 @@ import {
 } from "native-base";
 import QRCodeScanner from "../../components/QRCodeScanner";
 
-export default class QRCodeTest extends React.Component {
+export default class AuthorizationScanner extends React.Component {
 
     constructor(props) {
         super(props);
@@ -30,6 +30,8 @@ export default class QRCodeTest extends React.Component {
     onBarCodeRead = (data, bounds) => {
         console.log(data,bounds);
         alert(JSON.stringify(data));
+        this.props.navigation.goBack();
+        console.log("going back");
     };
 
     render() {

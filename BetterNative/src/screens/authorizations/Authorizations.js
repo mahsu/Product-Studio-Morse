@@ -44,10 +44,7 @@ export default class Authorizations extends React.Component {
                     <Title>Authorizations</Title>
                     </Body>
                     <Right>
-                        <Button transparent onPress={() => {
-                            console.log(state);
-                            state.handleBarCodePress();
-                        }}>
+                        <Button transparent onPress={() => navigation.navigate("AuthorizationScanner")}>
                             <Icon name="ios-barcode-outline"/>
                         </Button>
                     </Right>
@@ -56,36 +53,20 @@ export default class Authorizations extends React.Component {
         })
     };
 
-    handleBarCodePress = () => {
-        console.log("Handle bar code press");
-        this.setState({isScanRequest: true});
-    };
+    onAuthorizationParsed = () => {
 
-    componentDidMount() {
-        this.props.navigation.setParams({handleBarCodePress: this.handleBarCodePress});
-    }
+    };
 
     constructor(props) {
         super(props);
 
         this.state = {
-            authorizations: authorizations,
-            isScanRequest: false
+            authorizations: authorizations
         };
     }
 
-    onBarCodeRead = (data, bounds) => {
-        console.log(data, bounds);
-        alert(JSON.stringify(data));
-        this.setState({isScanRequest: false});
-    };
 
     render() {
-        if (this.state.isScanRequest) {
-            return (
-                <QRCodeScanner onBarCodeRead={this.onBarCodeRead}/>
-            )
-        }
         return (
             <Container>
                 <Content style={{backgroundColor: "white"}}>

@@ -3,6 +3,7 @@ import {Image, ImageBackground} from "react-native";
 import {Container, Content, Text, List, ListItem} from "native-base";
 import Notifications from "../screens/Notifications.js";
 import Authorizations from "../screens/authorizations/Authorizations.js";
+import AuthorizationScanner from "../screens/authorizations/AuthorizationScanner";
 import NewAuthorization from "../screens/authorizations/NewAuthorization.js";
 import Wallet from "../screens/Wallet.js";
 import Profile from "../screens/Profile.js";
@@ -61,7 +62,8 @@ const NotificationsNavigator = StackNavigator({
 });
 
 const AuthorizationsNavigator = StackNavigator({
-    Authorizations: {screen: Authorizations}
+    Authorizations: {screen: Authorizations},
+    AuthorizationScanner: {screen: AuthorizationScanner}
 });
 
 const NewAuthorizationNavigator = StackNavigator({
