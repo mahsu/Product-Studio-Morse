@@ -13,7 +13,7 @@ router.route('/register')
 router.route('/login')
     .post(validateBody(schemas.authSchema), passport.authenticate('local', {session: false}), AuthController.signin);
 
-router.route('/secret')
-    .get(passport.authenticate('jwt', {session: false}), AuthController.secret);
+router.route('/invalidate')
+    .get(passport.authenticate('jwt', {session: false}), AuthController.invalidate);
 
 module.exports = router;

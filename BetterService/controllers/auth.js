@@ -1,6 +1,6 @@
-const JWT = require('jsonwebtoken')
-const User = require('../models/User')
-const {JWT_SECRET} = require('../config/index')
+const JWT = require('jsonwebtoken');
+const User = require('../models/User');
+const {JWT_SECRET} = require('../config/index');
 const crypto = require('crypto');
 
 signToken = ((user) => {
@@ -12,6 +12,15 @@ signToken = ((user) => {
     }, JWT_SECRET)
 });
 
+async function newuid() {
+    try {
+        let buf = await crypto.randomBytes(32);
+        return buf.toString('hex');
+    }
+    catch (error) {
+        return res.status(500);
+    }
+}
 
 module.exports = {
 
@@ -25,14 +34,8 @@ module.exports = {
             return res.status(403).json({error: 'Email is already in use'})
         }
         const newUser = new User({email, password});
-        try {
-            let buf = await crypto.randomBytes(32);
-            newUser.uid = buf.toString('hex');
-        }
-        catch (error) {
-            return res.status(500);
-        }
-        console.log(newUser);
+
+        newUser.uid = await newuid();
         await newUser.save();
 
         const token = signToken(newUser);
@@ -46,7 +49,9 @@ module.exports = {
         res.status(200).json({token})
     },
 
-    secret: async (req, res, next) => {
-        res.json({secret: "resource"});
+    invalidate: async (req, res, next) => {
+        req.user.uid = await newuid();
+        await req.user.save();
+        res.status(200).json({uid: req.user.uid});
     }
 };
