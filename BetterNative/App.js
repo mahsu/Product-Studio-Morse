@@ -7,8 +7,10 @@ import {createStore} from 'redux';
 import AppNavigator from "./src/navigation/AppNavigator.js";
 import SidebarNavigator from "./src/navigation/SidebarNavigator.js";
 import identityApp from "./src/redux/reducers";
+import {setLogin} from "./src/redux/actions";
 import Signin from "./src/screens/Signin";
 import {endpoint} from "./src/util";
+import {keys} from "./src/store";
 
 let store = createStore(identityApp);
 
@@ -20,6 +22,23 @@ export default class App extends React.Component {
         this.state = {
             fontsAreLoaded: false,
             authenticated: false
+        }
+    }
+
+    async initUserStore() {
+        //mock the user id for demo purposes
+        //in reality, the user id will be generated once at registration
+        //and only rehydrated after invalidation. Additionally, it is important that the user id is kept secret
+        const userid = "f65ba48a48ecc02808eaaf9ee235241b7f2066cb23ac3efe6b360fd62c4cc3e2";
+
+        try {
+            const value = await AsyncStorage.getItem(keys.userid);
+            if (value === null){
+                await AsyncStorage.setItem(keys.userid, userid);
+            }
+            store.dispatch(setUid(userid));
+        } catch (error) {
+            // Error retrieving data
         }
     }
 
@@ -41,6 +60,7 @@ export default class App extends React.Component {
             if (response.status === 200) {
                 let responseJson = await response.json();
                 console.log(responseJson);
+                store.dispatch(setLogin(responseJson.token));
                 this.setState({
                     authenticated: true
                 })
@@ -57,6 +77,7 @@ export default class App extends React.Component {
     };
 
     async componentWillMount() {
+        await this.initUserStore();
         await Expo.Font.loadAsync({
             'Ionicons': require('native-base/Fonts/Ionicons.ttf'),
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
