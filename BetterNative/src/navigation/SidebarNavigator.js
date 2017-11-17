@@ -9,10 +9,11 @@ import Profile from "../screens/Profile.js";
 import Settings from "../screens/Settings.js";
 import AddIdentity from "../screens/AddIdentity.js";
 import CameraTest from  "../screens/CameraTest";
+import QRCodeTest from "../screens/QRCodeTest";
 
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 
-const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings","CameraTest"/*, "Logout"*/];
+const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings","QRCodeTest","CameraTest"/*, "Logout"*/];
 
 class Sidebar extends React.Component {
 
@@ -88,7 +89,8 @@ const SidebarNavigator = DrawerNavigator(
         Wallet: {screen: WalletNavigator},
         Profile: {screen: ProfileNavigator},
         Settings: {screen: SettingsNavigator},
-        CameraTest: {screen: CameraTest}
+        CameraTest: {screen: CameraTest},
+        QRCodeTest: {screen: QRCodeTest}
         //Logout: {screen: Logout}
     },
     {
