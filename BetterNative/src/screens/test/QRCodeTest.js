@@ -19,7 +19,7 @@ import {
     Col,
     Picker
 } from "native-base";
-import QRCodeScanner from "../components/QRCodeScanner";
+import QRCodeScanner from "../../components/QRCodeScanner";
 
 export default class QRCodeTest extends React.Component {
 
@@ -29,7 +29,7 @@ export default class QRCodeTest extends React.Component {
 
     onBarCodeRead = (data, bounds) => {
         console.log(data,bounds);
-        alert(data);
+        alert(JSON.stringify(data));
     };
 
     render() {
