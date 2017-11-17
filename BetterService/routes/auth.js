@@ -53,10 +53,10 @@ passport.use(new LocalStrategy({
 }));
 
 
-router.route('/signup')
+router.route('/register')
     .post(validateBody(schemas.authSchema), AuthController.signup);
 
-router.route('/signin')
+router.route('/login')
     .post(validateBody(schemas.authSchema), passport.authenticate('local', {session: false}), AuthController.signin);
 
 router.route('/secret')
