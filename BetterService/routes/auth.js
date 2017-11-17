@@ -16,4 +16,7 @@ router.route('/login')
 router.route('/invalidate')
     .get(passport.authenticate('jwt', {session: false}), AuthController.invalidate);
 
+router.route('/verify')
+    .get(passport.authenticate('jwt', {session: false}), AuthController.verify);
+
 module.exports = router;
