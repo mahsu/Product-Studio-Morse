@@ -42,7 +42,7 @@ export default class Profile extends React.Component {
 
         this.state = {
             selectedIdType: "",
-            state: ""
+            state: "New York"
         }
     }
 
@@ -82,12 +82,12 @@ export default class Profile extends React.Component {
 
                 <Item fixedLabel>
                     <Label>License ID #</Label>
-                    <Input />
+                    <Input value="812383431" />
                 </Item>
 
                 <Item fixedLabel>
                     <Label>Expiration</Label>
-                    <Input />
+                    <Input value="10/31/2021" />
                 </Item>
 
                 <Item></Item>                 
