@@ -58,6 +58,11 @@ export default class Profile extends React.Component {
         })
     }
 
+    addProfile = () => {
+        this.props.navigation.state.params.onProfileAdd()
+        this.props.navigation.goBack();
+    }
+
     render() {
         var stateForm = (
             <Row><Col>
@@ -92,7 +97,7 @@ export default class Profile extends React.Component {
 
                 <Item></Item>                 
 
-                <Button block primary >
+                <Button block primary onPress={() => {this.addProfile()}} >
                     <Text>Submit</Text>
                 </Button>
             </Col></Row>

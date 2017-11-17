@@ -86,7 +86,9 @@ export default class Profile extends React.Component {
         //alert(payload);
     };*/
 
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = ({navigation}) => {
+        const state = navigation.state.params;
+        return ({
         header: (
             <Header>
                 <Left>
@@ -100,13 +102,14 @@ export default class Profile extends React.Component {
                 </Body>
 
                 <Right>
-                    <Button transparent onPress={() => navigation.navigate("AddIdentity")}>
+                    <Button transparent onPress={() => navigation.navigate("AddIdentity", state)}>
                         <Icon name="ios-add"/>
                     </Button>
                 </Right>
             </Header>
         )
-    });
+        })
+    };
 
     constructor(props) {
         super(props);
