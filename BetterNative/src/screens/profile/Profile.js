@@ -1,22 +1,40 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import {Button, Container, Header, Content, Form, Item, Input, Left, Icon, Body, Right, Title, Card, CardItem, Row, Col, Picker} from "native-base";
+import {
+    Button,
+    Container,
+    Header,
+    Content,
+    Form,
+    Item,
+    Input,
+    Left,
+    Icon,
+    Body,
+    Right,
+    Title,
+    Card,
+    CardItem,
+    Row,
+    Col,
+    Picker
+} from "native-base";
 
 const IdStyle = StyleSheet.create({
     content: {
-      flex: 0.7,
-      flexDirection:'column',
-      justifyContent: 'center'
+        flex: 0.7,
+        flexDirection: 'column',
+        justifyContent: 'center'
     },
     label: {
-      flex: 0.3,
-      alignItems: 'center'
+        flex: 0.3,
+        alignItems: 'center'
     },
     icon: {
-      fontSize: 65
+        fontSize: 65
     },
     approvedIcon: {
-      fontSize: 15
+        fontSize: 15
     },
 });
 
@@ -80,12 +98,12 @@ export default class Profile extends React.Component {
                 </Left>
 
                 <Body>
-                    <Title>Profile</Title>
+                <Title>Profile</Title>
                 </Body>
-                
+
                 <Right>
                     <Button transparent onPress={() => navigation.navigate("AddIdentity")}>
-                        <Text>Add</Text>
+                        <Icon name="ios-add"/>
                     </Button>
                 </Right>
             </Header>
@@ -100,19 +118,23 @@ export default class Profile extends React.Component {
         return (
             <Container>
                 <Content>
-                    {Identities.map((Identity, index) =>  {
+                    {Identities.map((Identity, index) => {
                         return (
                             <Card key={index}>
                                 <CardItem>
                                     <Body>
-                                        <Row>
-                                            <Col style={IdStyle.label}>
-                                                <Text><Icon name={IdentityIcons[Identity.type]} style={IdStyle.icon} /></Text>
+                                    <Row>
+                                        <Col style={IdStyle.label}>
+                                            <Text><Icon name={IdentityIcons[Identity.type]}
+                                                        style={IdStyle.icon}/></Text>
 
-                                                <Text style={{color: StatusColors[Identity.status]}} onPress={() => alert(Identity.message)}>{Identity.type} <Icon name={StatusIcons[Identity.status]} style={[IdStyle.approvedIcon, {color: StatusColors[Identity.status]}]} /></Text>
-                                            </Col>
-                                            <Col style={IdStyle.content}><Text>{Identity.content}</Text></Col>
-                                        </Row>
+                                            <Text style={{color: StatusColors[Identity.status]}}
+                                                  onPress={() => alert(Identity.message)}>{Identity.type} <Icon
+                                                name={StatusIcons[Identity.status]}
+                                                style={[IdStyle.approvedIcon, {color: StatusColors[Identity.status]}]}/></Text>
+                                        </Col>
+                                        <Col style={IdStyle.content}><Text>{Identity.content}</Text></Col>
+                                    </Row>
                                     </Body>
                                 </CardItem>
                             </Card>

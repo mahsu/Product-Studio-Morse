@@ -6,11 +6,12 @@ import Authorizations from "../screens/authorizations/Authorizations.js";
 import AuthorizationScanner from "../screens/authorizations/AuthorizationScanner";
 import NewAuthorization from "../screens/authorizations/NewAuthorization.js";
 import Wallet from "../screens/Wallet.js";
-import Profile from "../screens/Profile.js";
+import Profile from "../screens/profile/Profile.js";
 import Settings from "../screens/Settings.js";
-import AddIdentity from "../screens/AddIdentity.js";
+import AddIdentity from "../screens/profile/AddIdentity.js";
 import CameraTest from "../screens/test/CameraTest";
 import QRCodeTest from "../screens/test/QRCodeTest";
+import IdentityCamera from "../screens/profile/IdentityCamera";
 
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 
@@ -34,7 +35,7 @@ const routes = [
     /*{
         "name": "QRCodeTest",
         "icon": "contract"
-    },*/
+    },
     {
         "name": "CameraTest",
         "icon": "contract"
@@ -42,7 +43,7 @@ const routes = [
     {
         "name": "NewAuthorization",
         "icon": "contract"
-    }/*,
+    },
     {
         "name": "Logout",
         "icon": "wallet"
@@ -107,7 +108,8 @@ const WalletNavigator = StackNavigator({
 
 const ProfileNavigator = StackNavigator({
     Profile: {screen: Profile},
-    AddIdentity: {screen: AddIdentity}
+    AddIdentity: {screen: AddIdentity},
+    IdentityCamera: {screen: IdentityCamera}
 });
 
 const SettingsNavigator = StackNavigator({
