@@ -21,12 +21,12 @@ export default class Profile extends React.Component {
             <Header>
                 <Left>
                     <Button transparent onPress={() => navigation.goBack()}>
-                        <Text><Icon name="arrow-back"/> Back</Text>
+                        <Icon name="arrow-back"/>
                     </Button>
                 </Left>
 
                 <Body>
-                    <Title>Profile</Title>
+                    <Title>New Document</Title>
                 </Body>
                 
                 <Right></Right>
