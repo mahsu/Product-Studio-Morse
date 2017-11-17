@@ -38,7 +38,7 @@ const IdStyle = StyleSheet.create({
     },
 });
 
-const state = {
+const stateLicense = {
     key: "String4",
     type: "License",
     status: "Approved",
@@ -67,9 +67,24 @@ const StatusColors = {
 }
 
 export default class Profile extends React.Component {
-    onNewID(value: string) {
-        // do something
+    addProfile = (data) => {
+        this.state.identities.push(stateLicense);
+        this.setState({identities: this.state.identities});
+    };
+
+    componentDidMount() {
+        this.props.navigation.setParams({
+            //onProfileParsed: this.onProfileParsed,
+            onProfileAdd: this.addProfile
+        });
     }
+
+    /*onProfileParsed = (payload) => {
+        //called when we get the qr code payload from the authorizationscanner
+        var newauth = {onProfileAdd: this.addProfile};
+        this.props.navigation.navigate("NewAuthorization", newauth);
+        //alert(payload);
+    };*/
 
     static navigationOptions = ({navigation}) => ({
         header: (
@@ -121,8 +136,7 @@ export default class Profile extends React.Component {
                     date: new Date(),
                     content: "United States of America\n#43819929181\nExpires: 12/20/2019",
                     message: "Your Passport verification is still pending and should be approved within 2 hours"
-                },
-                state
+                }
             ]
         }
     }
