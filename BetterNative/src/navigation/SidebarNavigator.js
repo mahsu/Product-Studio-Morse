@@ -31,10 +31,10 @@ const routes = [
         "name": "Settings",
         "icon": "ios-cog"
     },
-    {
+    /*{
         "name": "QRCodeTest",
         "icon": "contract"
-    },
+    },*/
     {
         "name": "CameraTest",
         "icon": "contract"

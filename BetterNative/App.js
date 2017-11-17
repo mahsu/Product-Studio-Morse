@@ -45,6 +45,10 @@ export default class App extends React.Component {
     authenticate = async (email, password) => {
 
         try {
+            //todo removed await due to network latency
+            this.setState({
+                authenticated: true
+            })
             let response = await fetch(endpoint + 'auth/login', {
                 method: "POST",
                 headers: {

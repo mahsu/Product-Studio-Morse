@@ -33,8 +33,9 @@ export default class AuthorizationScanner extends React.Component {
     onAuthorizationParsed = (data) => {
         if (typeof this.props.navigation.state.params.onAuthorizationParsed === 'function') {
             this.props.navigation.state.params.onAuthorizationParsed(data);
+            this.props.navigation.state.params.onAuthorizationParsed = null; //prevent duplicate calls
         } else {
-            alert("onauthorizationparsed undefined");
+            console.log("onauthorizationparsed undefined");
         }
     };
 
