@@ -21,12 +21,12 @@ import QRCodeScanner from "../../components/QRCodeScanner";
 import {endpoint} from '../../util';
 
 const chase = {
-        "institution": "Chase",
-        "icon": require("../../../res/img/jpm.png"),
-        "type": "Advantage Checking",
-        "number": "#339123499",
-        "status": "Pending"
-}
+    "institution": "Chase",
+    "icon": require("../../../res/img/jpm.png"),
+    "type": "Advantage Checking",
+    "number": "-",
+    "status": "Pending"
+};
 
 const authorizations = [
     {
@@ -42,14 +42,13 @@ const authorizations = [
         "type": "Savings Plus",
         "number": "#22919235",
         "status": "Approved"
-    },
-    chase
+    }
 ];
 
 const colors = {
     Approved: "green",
     Pending: "#969300"
-}
+};
 
 export default class Authorizations extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -75,17 +74,23 @@ export default class Authorizations extends React.Component {
         })
     };
 
+    addAuthorization = (data) => {
+        this.state.authorizations.push(chase);
+        this.setState({authorizations: this.state.authorizations});
+    };
+
     componentDidMount() {
-        this.props.navigation.setParams({onAuthorizationParsed: this.onAuthorizationParsed});
+        this.props.navigation.setParams({
+            onAuthorizationParsed: this.onAuthorizationParsed,
+            onAuthorizationAdd: this.addAuthorization
+        });
     }
 
     onAuthorizationParsed = (payload) => {
         //called when we get the qr code payload from the authorizationscanner
-        var newauth = {};
+        var newauth = {onAuthorizationAdd: this.addAuthorization};
         this.props.navigation.navigate("NewAuthorization", newauth);
         //alert(payload);
-
-
     };
 
     constructor(props) {
@@ -105,8 +110,8 @@ export default class Authorizations extends React.Component {
                         {this.state.authorizations.map((authorization, index) => {
                             let spinner = null;
 
-                            if(authorization.status == "Pending")
-                                spinner = <ActivityIndicator style={{width:28, height:10}} color="#969300" />
+                            if (authorization.status == "Pending")
+                                spinner = <ActivityIndicator style={{width: 28, height: 10}} color="#969300"/>
 
                             return (
                                 <ListItem avatar key={index}>
@@ -120,8 +125,8 @@ export default class Authorizations extends React.Component {
                                     </Body>
                                     <Right>
                                         <Text style={{fontWeight: "bold"}}> </Text>
-                                        <Text style={{color:colors[authorization.status]}}>
-                                            {spinner}
+                                        <Text style={{color: colors[authorization.status]}}>
+
                                             {authorization.status}
                                         </Text>
                                     </Right>

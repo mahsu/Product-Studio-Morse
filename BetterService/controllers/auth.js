@@ -53,5 +53,10 @@ module.exports = {
         req.user.uid = await newuid();
         await req.user.save();
         res.status(200).json({uid: req.user.uid});
+    },
+
+    verify: async (req, res, next) => {
+        let valid = (req.body.uid === req.user.uid);
+        res.status(200).json({valid});
     }
 };
