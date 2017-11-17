@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 import {
     Button,
     Container,
@@ -25,9 +25,22 @@ const authorizations = [
         "institution": "Bank of America",
         "icon": require("../../../res/img/boa.png"),
         "type": "Premier Checking Account",
-        "number": "#881928239"
-    }
+        "number": "#881928239",
+        "status": "Approved"
+    },
+    {
+        "institution": "HSBC",
+        "icon": require("../../../res/img/hsbc.png"),
+        "type": "Savings Plus",
+        "number": "#22919235",
+        "status": "Pending"
+    },
 ];
+
+const colors = {
+    Approved: "green",
+    Pending: "#969300"
+}
 
 export default class Authorizations extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -77,17 +90,27 @@ export default class Authorizations extends React.Component {
                 <Content style={{backgroundColor: "white"}}>
                     <List>
                         {this.state.authorizations.map((authorization, index) => {
+                            let spinner = null;
+
+                            if(authorization.status == "Pending")
+                                spinner = <ActivityIndicator style={{width:28, height:10}} color="#969300" />
+
                             return (
-                                <ListItem avatar key="index">
+                                <ListItem avatar key={index}>
                                     <Left>
                                         <Thumbnail source={authorization.icon}/>
                                     </Left>
                                     <Body>
                                     <Text style={{fontWeight: "bold"}}>{authorization.institution}</Text>
                                     <Text style={{color: "#787878"}} note>{authorization.type}</Text>
+                                    <Text style={{color: "#787878"}} note>{authorization.number}</Text>
                                     </Body>
                                     <Right>
-                                        <Text style={{color: "#787878"}} note>{authorization.number}</Text>
+                                        <Text style={{fontWeight: "bold"}}> </Text>
+                                        <Text style={{color:colors[authorization.status]}}>
+                                            {spinner}
+                                            {authorization.status}
+                                        </Text>
                                     </Right>
                                 </ListItem>
                             )
