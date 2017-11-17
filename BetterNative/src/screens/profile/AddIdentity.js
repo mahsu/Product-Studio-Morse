@@ -79,7 +79,7 @@ export default class Profile extends React.Component {
 
                         <Item>
                             <Label>Photo</Label>
-                            <Button><Text>Photo ID</Text></Button>
+                            <Button onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Text>Photo ID</Text></Button>
                         </Item>
 
                         <Item>
