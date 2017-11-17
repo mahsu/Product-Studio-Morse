@@ -1,5 +1,6 @@
 {
     "scripts": {
-      "postinstall": "cd BetterService && npm install"
+      "postinstall": "cd BetterService && npm install",
+      "start": "node ./BetterService/bin/www"
     }
 }
