@@ -21,7 +21,7 @@ export default class Profile extends React.Component {
             <Header>
                 <Left>
                     <Button transparent onPress={() => navigation.goBack()}>
-                        <Text><Icon name="arrow-back"/> Back</Text>
+                        <Text><Icon name="arrow-back"/></Text>
                     </Button>
                 </Left>
 
@@ -36,6 +36,16 @@ export default class Profile extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectedIdType: ""
+        }
+    }
+
+    onIdTypeSelect(newValue) {
+        this.setState({
+            selectedIdType: newValue
+        })
     }
 
     render() {
@@ -46,8 +56,8 @@ export default class Profile extends React.Component {
 			            <Picker
 			              mode="dropdown"
 			              placeholder="Select One"
-			              /*selectedValue={this.state.selected2}*/
-			              /*onValueChange={this.onValueChange2.bind(this)}*/
+			              selectedValue={this.state.selectedIdType}
+			              onValueChange={this.onIdTypeSelect.bind(this)}
 			            >
 	                    	{IdTypes.map((IdType, index) =>  {
 	                    		return <Item label={IdType.type} value={IdType.type} key={index} />

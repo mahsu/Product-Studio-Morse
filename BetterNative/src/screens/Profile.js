@@ -65,19 +65,6 @@ const StatusColors = {
     Denied: "red"
 }
 
-const IdTypes = [
-    {"type": "Passport"},
-    {"type": "Driver's License"},
-    {"type": "Health Insurance Card"},
-    {"type": "State ID"},
-    {"type": "Social Security Card"},
-    {"type": "Birth Certificate"},
-    {"type": "Student ID"},
-    {"type": "DOD ID"},
-    {"type": "VA Document"},
-    {"type": "Native American Tribal Document"}
-];
-
 export default class Profile extends React.Component {
     onNewID(value: string) {
         // do something
