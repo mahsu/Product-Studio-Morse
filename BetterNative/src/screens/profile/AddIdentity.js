@@ -59,6 +59,50 @@ export default class Profile extends React.Component {
     }
 
     render() {
+        var stateForm = (
+            <Row><Col>
+                <Item>
+                    <Label>Photo</Label>
+                    <Button primary onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Text>Photo ID</Text></Button>
+                </Item>
+
+                <Item>
+                    <Label>State</Label>
+                    <Picker
+                        mode="dropdown"
+                        placeholder="State"
+                        selectedValue={this.state.state}
+                        onValueChange={this.onStateSelect.bind(this)}
+                    >
+                        {states.map((state, index) =>  {
+                            return <Item label={state} value={state} key={index} />
+                        })}
+                    </Picker>
+                </Item>
+
+                <Item fixedLabel>
+                    <Label>License ID #</Label>
+                    <Input />
+                </Item>
+
+                <Item fixedLabel>
+                    <Label>Expiration</Label>
+                    <Input />
+                </Item>
+
+                <Item></Item>                 
+
+                <Button block primary >
+                    <Text>Submit</Text>
+                </Button>
+            </Col></Row>
+        )
+
+        let form = null;
+
+        if(this.state.selectedIdType == "Driver's License")
+            form = stateForm
+
         return (
             <Container>
                 <Content>
@@ -77,40 +121,8 @@ export default class Profile extends React.Component {
                             </Picker>
                         </Item>
 
-                        <Item>
-                            <Label>Photo</Label>
-                            <Button onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Text>Photo ID</Text></Button>
-                        </Item>
+                        {form}
 
-                        <Item>
-                            <Label>State</Label>
-                            <Picker
-                                mode="dropdown"
-                                placeholder="State"
-                                selectedValue={this.state.state}
-                                onValueChange={this.onStateSelect.bind(this)}
-                            >
-                                {states.map((state, index) =>  {
-                                    return <Item label={state} value={state} key={index} />
-                                })}
-                            </Picker>
-                        </Item>
-
-                        <Item fixedLabel>
-                            <Label>License ID #</Label>
-                            <Input />
-                        </Item>
-
-                        <Item fixedLabel>
-                            <Label>Expiration</Label>
-                            <Input />
-                        </Item>
-
-                        
-                            <Button block primary>
-                                <Text>Submit</Text>
-                            </Button>
-                        
                     </Form>
                 </Content>
             </Container>

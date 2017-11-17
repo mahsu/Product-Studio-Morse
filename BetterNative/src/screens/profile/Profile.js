@@ -38,37 +38,20 @@ const IdStyle = StyleSheet.create({
     },
 });
 
-const Identities = [
-    {
-        key: "String1",
-        type: "Address",
-        status: "Approved",
-        date: new Date(),
-        content: "2 West Loop Road\nApt 131\nNew York, NY 10044",
-        message: "Your address was confirmed by the US postal service on 9/22/2016"
-    },
-    {
-        key: "String2",
-        type: "SSN",
-        status: "Approved",
-        date: new Date(),
-        content: "044-**-****",
-        message: "Your SSN was confirmed by the Social Security Administration on 8/14/2016"
-    },
-    {
-        key: "String3",
-        type: "Passport",
-        status: "Pending",
-        date: new Date(),
-        content: "United States of America\n#43819929181\nExpires: 12/20/2019",
-        message: "Your Passport verification is still pending and should be approved within 2 hours"
-    },
-]
+const state = {
+    key: "String4",
+    type: "License",
+    status: "Approved",
+    date: new Date(),
+    content: "New York\n#812383431\nExpires: 10/31/2021",
+    message: "Your driver's license was confirmed by the DMV on 9/22/2016"
+}
 
 const IdentityIcons = {
     Passport: "ios-plane-outline",
     Address: "ios-home-outline",
-    SSN: "card"
+    SSN: "card",
+    License: "ios-car-outline"
 }
 
 const StatusIcons = {
@@ -112,13 +95,43 @@ export default class Profile extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            identities: [
+                {
+                    key: "String1",
+                    type: "Address",
+                    status: "Approved",
+                    date: new Date(),
+                    content: "2 West Loop Road\nApt 131\nNew York, NY 10044",
+                    message: "Your address was confirmed by the US postal service on 9/22/2016"
+                },
+                {
+                    key: "String2",
+                    type: "SSN",
+                    status: "Approved",
+                    date: new Date(),
+                    content: "044-**-****",
+                    message: "Your SSN was confirmed by the Social Security Administration on 8/14/2016"
+                },
+                {
+                    key: "String3",
+                    type: "Passport",
+                    status: "Pending",
+                    date: new Date(),
+                    content: "United States of America\n#43819929181\nExpires: 12/20/2019",
+                    message: "Your Passport verification is still pending and should be approved within 2 hours"
+                },
+                state
+            ]
+        }
     }
 
     render() {
         return (
             <Container>
                 <Content>
-                    {Identities.map((Identity, index) => {
+                    {this.state.identities.map((Identity, index) => {
                         return (
                             <Card key={index}>
                                 <CardItem>
