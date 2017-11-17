@@ -1,6 +1,5 @@
 const passport = require('passport');
 const passportConfig = require('../helpers/passport');
-const User = require('../models/User');
 
 const express = require('express');
 const router = require('express-promise-router')();

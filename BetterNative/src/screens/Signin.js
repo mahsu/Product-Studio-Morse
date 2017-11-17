@@ -7,21 +7,25 @@ import {Button, Container, Header, Content, Form, Item, Input, Left, Icon, Body,
 export default class Signin extends React.Component {
 
     static propTypes = {
-        value: PropTypes.string,
+        email: PropTypes.string,
         onLoginSubmit: PropTypes.func
     };
 
     static defaultProps = {
-        value: ''
+        email: '',
     };
 
     constructor(props) {
         super(props);
+        this.state = {
+            email: props.email,
+            password: "password"
+        }
     }
 
     changeHandler = (e) => {
         if (typeof this.props.onLoginSubmit === 'function') {
-            this.props.onLoginSubmit(e.target.value);
+            this.props.onLoginSubmit(this.state.email, this.state.password);
         }
     };
 
@@ -38,10 +42,10 @@ export default class Signin extends React.Component {
                 <Content>
                     <Form>
                         <Item>
-                            <Input placeholder="Username" value={this.props.value}/>
+                            <Input placeholder="Email" value={this.state.email}/>
                         </Item>
                         <Item last>
-                            <Input placeholder="Password"/>
+                            <Input placeholder="Password" value={this.state.password} secureTextEntry={true}/>
                         </Item>
                     </Form>
                     <Button block primary onPress={this.changeHandler}>

@@ -8,6 +8,7 @@ import AppNavigator from "./src/navigation/AppNavigator.js";
 import SidebarNavigator from "./src/navigation/SidebarNavigator.js";
 import identityApp from "./src/redux/reducers";
 import Signin from "./src/screens/Signin";
+import {endpoint} from "./src/util";
 
 let store = createStore(identityApp);
 
@@ -22,12 +23,31 @@ export default class App extends React.Component {
         }
     }
 
-    authenticate = (val) => {
-        //todo set state to authenticated
+    authenticate = async (email, password) => {
 
-        this.setState({
-            authenticated: true
-        });
+        try {
+            let response = await fetch(endpoint + 'auth/login', {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                })
+            });
+
+            if (response.status === 200) {
+                let responseJson = await response.json();
+                console.log(responseJson);
+                this.setState({
+                    authenticated: true
+                })
+            }
+        } catch(error) {
+            console.error(error);
+        }
 
         return;
     };
@@ -53,7 +73,7 @@ export default class App extends React.Component {
             return (
                 <Provider store={store}>
                     <Root>
-                        <Signin onLoginSubmit={this.authenticate} value={'123'}/>
+                        <Signin onLoginSubmit={this.authenticate} email={'test@example.com'}/>
                     </Root>
                 </Provider>
             );
