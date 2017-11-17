@@ -1,5 +1,5 @@
 import React from "react";
-import {AppRegistry, Image, StatusBar} from "react-native";
+import {Image, ImageBackground} from "react-native";
 import {Container, Content, Text, List, ListItem} from "native-base";
 import Notifications from "../screens/Notifications.js";
 import Authorizations from "../screens/Authorizations.js";
@@ -8,10 +8,11 @@ import Wallet from "../screens/Wallet.js";
 import Profile from "../screens/Profile.js";
 import Settings from "../screens/Settings.js";
 import AddIdentity from "../screens/AddIdentity.js";
+import CameraTest from  "../screens/CameraTest";
 
-import { DrawerNavigator, StackNavigator } from "react-navigation";
+import {DrawerNavigator, StackNavigator} from "react-navigation";
 
-const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings"/*, "Logout"*/];
+const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings","CameraTest"/*, "Logout"*/];
 
 class Sidebar extends React.Component {
 
@@ -19,7 +20,7 @@ class Sidebar extends React.Component {
         return (
             <Container>
                 <Content>
-                    <Image
+                    <ImageBackground
                         source={{
                             uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/drawer-cover.png?raw=true"
                         }}
@@ -29,14 +30,13 @@ class Sidebar extends React.Component {
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
-                        <Image
-                            square
-                            style={{height: 80, width: 70}}
-                            source={{
-                                uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/logo.png?raw=true"
-                            }}
-                        />
-                    </Image>
+                    <Image
+                        square
+                        style={{height: 80, width: 70}}
+                        source={{
+                            uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/logo.png?raw=true"
+                        }}/>
+                    </ImageBackground>
                     <List
                         dataArray={routes}
                         renderRow={data => {
@@ -88,6 +88,7 @@ const SidebarNavigator = DrawerNavigator(
         Wallet: {screen: WalletNavigator},
         Profile: {screen: ProfileNavigator},
         Settings: {screen: SettingsNavigator},
+        CameraTest: {screen: CameraTest}
         //Logout: {screen: Logout}
     },
     {
