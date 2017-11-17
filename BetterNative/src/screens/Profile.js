@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Button, Container, Header, Content, Form, Item, Input, Left, Icon, Body, Right, Title, Card, CardItem, Row, Col} from "native-base";
+import {StyleSheet, Text} from 'react-native';
+import {Button, Container, Header, Content, Form, Item, Input, Left, Icon, Body, Right, Title, Card, CardItem, Row, Col, Picker} from "native-base";
 
 const IdStyle = StyleSheet.create({
     content: {
@@ -65,7 +65,24 @@ const StatusColors = {
     Denied: "red"
 }
 
+const IdTypes = [
+    {"type": "Passport"},
+    {"type": "Driver's License"},
+    {"type": "Health Insurance Card"},
+    {"type": "State ID"},
+    {"type": "Social Security Card"},
+    {"type": "Birth Certificate"},
+    {"type": "Student ID"},
+    {"type": "DOD ID"},
+    {"type": "VA Document"},
+    {"type": "Native American Tribal Document"}
+];
+
 export default class Profile extends React.Component {
+    onNewID(value: string) {
+        // do something
+    }
+
     static navigationOptions = ({navigation}) => ({
         header: (
             <Header>
@@ -80,7 +97,21 @@ export default class Profile extends React.Component {
                 </Body>
                 
                 <Right>
-                    
+                    <Button transparent onPress={() => navigation.navigate("AddIdentity")}>
+                        
+                    <Form>
+                        <Picker
+                          mode="dropdown"
+                          placeholder="+"
+                          /*selectedValue={this.state.whatever}*/
+                          onValueChange={(key) => alert("show camera here")}
+                        >
+                            {IdTypes.map((IdType, index) =>  {
+                                return <Item label={IdType.type} value={IdType.type} key={index} />
+                            })}
+                        </Picker>
+                    </Form>
+                    </Button>
                 </Right>
             </Header>
         )
