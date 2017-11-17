@@ -44,7 +44,7 @@ export default class Authorizations extends React.Component {
                     <Title>Authorizations</Title>
                     </Body>
                     <Right>
-                        <Button transparent onPress={() => navigation.navigate("AuthorizationScanner")}>
+                        <Button transparent onPress={() => navigation.navigate("AuthorizationScanner", state)}>
                             <Icon name="ios-barcode-outline"/>
                         </Button>
                     </Right>
@@ -53,7 +53,12 @@ export default class Authorizations extends React.Component {
         })
     };
 
-    onAuthorizationParsed = () => {
+    componentDidMount() {
+        this.props.navigation.setParams({onAuthorizationParsed: this.onAuthorizationParsed});
+    }
+
+    onAuthorizationParsed = (payload) => {
+        alert(payload);
 
     };
 

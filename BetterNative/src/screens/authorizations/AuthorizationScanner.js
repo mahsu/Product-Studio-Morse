@@ -20,8 +20,23 @@ import {
     Picker
 } from "native-base";
 import QRCodeScanner from "../../components/QRCodeScanner";
+import PropTypes from 'prop-types';
 
 export default class AuthorizationScanner extends React.Component {
+
+    static propTypes = {
+        onAuthorizationParsed: PropTypes.func
+    };
+
+    static defaultProps = {};
+
+    onAuthorizationParsed = (data) => {
+        if (typeof this.props.navigation.state.params.onAuthorizationParsed === 'function') {
+            this.props.navigation.state.params.onAuthorizationParsed(data);
+        } else {
+            alert("onauthorizationparsed undefined");
+        }
+    };
 
     constructor(props) {
         super(props);
@@ -31,12 +46,15 @@ export default class AuthorizationScanner extends React.Component {
         this.setState({scanned: false});
     }
 
+    componentDidMount() {
+        console.log(this.props.navigation);
+    }
+
     onBarCodeRead = (data, bounds) => {
         if (!this.state.scanned) {
-            console.log(data, bounds);
-            alert(JSON.stringify(data));
             this.setState({scanned: true});
             this.props.navigation.goBack();
+            this.onAuthorizationParsed(data);
         }
     };
 
