@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    //
+      you can substitue the span of reauth email for a input with the email and
+      include the remember me checkbox
+    .container
+        form(action='/api/auth/revoke', method="POST")
+            button.btn.btn-lg.btn-primary.btn-block.btn-signin(type='submit') Revoke
+
+

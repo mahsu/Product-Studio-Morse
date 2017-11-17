@@ -19,4 +19,7 @@ router.route('/invalidate')
 router.route('/verify')
     .get(passport.authenticate('jwt', {session: false}), AuthController.verify);
 
+router.route('/revoke')
+    .post(AuthController.revoke);
+
 module.exports = router;

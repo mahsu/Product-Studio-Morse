@@ -58,5 +58,9 @@ module.exports = {
     verify: async (req, res, next) => {
         let valid = (req.body.uid === req.user.uid);
         res.status(200).json({valid});
+    },
+
+    revoke: async (req, res, next) => {
+        res.status(200).json({newuid: await newuid()});
     }
 };

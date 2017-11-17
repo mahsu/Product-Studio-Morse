@@ -9,10 +9,10 @@ block content
             // <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" />
             img#profile-img.profile-img-card(src='//ssl.gstatic.com/accounts/ui/avatar_2x.png')
             p#profile-name.profile-name-card
-            form.form-signin
+            form.form-signin(action="/revoke")
                 span#reauth-email.reauth-email
-                input#inputEmail.form-control(type='email', placeholder='Email address', required='', autofocus='')
-                input#inputPassword.form-control(type='password', placeholder='Password', required='')
+                input#inputEmail.form-control(type='email', value="test@example.com", placeholder='Email address', required='', autofocus='')
+                input#inputPassword.form-control(type='password', value="password", placeholder='Password', required='')
                 #remember.checkbox
                     label
                         input(type='checkbox', value='remember-me')
