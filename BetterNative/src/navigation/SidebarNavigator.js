@@ -3,6 +3,7 @@ import {AppRegistry, Image, StatusBar} from "react-native";
 import {Container, Content, Text, List, ListItem} from "native-base";
 import Notifications from "../screens/Notifications.js";
 import Authorizations from "../screens/Authorizations.js";
+import NewAuthorization from "../screens/NewAuthorization.js";
 import Wallet from "../screens/Wallet.js";
 import Profile from "../screens/Profile.js";
 import Settings from "../screens/Settings.js";
@@ -10,7 +11,7 @@ import AddIdentity from "../screens/AddIdentity.js";
 
 import { DrawerNavigator, StackNavigator } from "react-navigation";
 
-const routes = ["Notifications", "Authorizations", "Wallet", "Profile", "Settings"/*, "Logout"*/];
+const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings"/*, "Logout"*/];
 
 class Sidebar extends React.Component {
 
@@ -62,6 +63,10 @@ const AuthorizationsNavigator = StackNavigator({
     Authorizations: {screen: Authorizations}
 });
 
+const NewAuthorizationNavigator = StackNavigator({
+    NewAuthorization: {screen: NewAuthorization}
+});
+
 const WalletNavigator = StackNavigator({
     Wallet: {screen: Wallet}
 });
@@ -79,6 +84,7 @@ const SidebarNavigator = DrawerNavigator(
     {
         Notifications: {screen: NotificationsNavigator},
         Authorizations: {screen: AuthorizationsNavigator},
+        NewAuthorization: {screen: NewAuthorizationNavigator},
         Wallet: {screen: WalletNavigator},
         Profile: {screen: ProfileNavigator},
         Settings: {screen: SettingsNavigator},
