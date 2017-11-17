@@ -2,14 +2,14 @@ import React from "react";
 import {Image, ImageBackground} from "react-native";
 import {Container, Content, Text, List, ListItem} from "native-base";
 import Notifications from "../screens/Notifications.js";
-import Authorizations from "../screens/Authorizations.js";
-import NewAuthorization from "../screens/NewAuthorization.js";
+import Authorizations from "../screens/authorizations/Authorizations.js";
+import NewAuthorization from "../screens/authorizations/NewAuthorization.js";
 import Wallet from "../screens/Wallet.js";
 import Profile from "../screens/Profile.js";
 import Settings from "../screens/Settings.js";
 import AddIdentity from "../screens/AddIdentity.js";
-import CameraTest from  "../screens/CameraTest";
-import QRCodeTest from "../screens/QRCodeTest";
+import CameraTest from "../screens/test/CameraTest";
+import QRCodeTest from "../screens/test/QRCodeTest";
 
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 

@@ -22,7 +22,7 @@ export default class QRCodeScanner extends Component {
         email: '',
     };
 
-    barcodeHandler = (data, bounds) => {
+    barcodeHandler = ({data, bounds}) => {
         if (typeof this.props.onBarCodeRead === 'function') {
             this.props.onBarCodeRead(data, bounds);
         }

@@ -49,7 +49,7 @@ export default class NewAuthorization extends React.Component {
                     <Row style={{backgroundColor:'#117ACA', padding:30}}>
                         <Col>
                             <Image 
-                                source={require('../../res/img/chase-white.png')}
+                                source={require('../../../res/img/chase-white.png')}
                                 style={{
                                     width: '100%',
                                     resizeMode: 'contain',
