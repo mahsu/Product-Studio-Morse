@@ -174,6 +174,7 @@ class UserForm extends Component {
           <FormGroupInput value={this.state.customer.address.zip} label="Zip" size='2' />
         </div>
         
+        {/* removing submit button for now */}
         {/*<button type="submit" className="btn btn-primary">Submit</button>*/}
       </form>
     )
