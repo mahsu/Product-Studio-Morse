@@ -63,7 +63,8 @@ const NotificationsNavigator = StackNavigator({
 
 const AuthorizationsNavigator = StackNavigator({
     Authorizations: {screen: Authorizations},
-    AuthorizationScanner: {screen: AuthorizationScanner}
+    AuthorizationScanner: {screen: AuthorizationScanner},
+    NewAuthorization: {screen: NewAuthorization}
 });
 
 const NewAuthorizationNavigator = StackNavigator({

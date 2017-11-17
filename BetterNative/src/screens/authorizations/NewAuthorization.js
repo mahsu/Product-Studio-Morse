@@ -19,23 +19,11 @@ const RequestedData = [
         type: "Cell Phone Number",
         icon: "ios-call-outline"
     }
-]
+];
 
 export default class NewAuthorization extends React.Component {
     static navigationOptions = ({navigation}) => ({
-        header: (
-            <Header>
-                <Left>
-                    <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
-                        <Icon name="menu"/>
-                    </Button>
-                </Left>
-                <Body>
-                    <Title>Auth Request</Title>
-                </Body>
-                <Right/>
-            </Header>
-        )
+        header: (<View/>)
     });
 
     constructor(props) {

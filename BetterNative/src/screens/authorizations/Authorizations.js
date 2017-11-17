@@ -58,7 +58,11 @@ export default class Authorizations extends React.Component {
     }
 
     onAuthorizationParsed = (payload) => {
-        alert(payload);
+        //called when we get the qr code payload from the authorizationscanner
+        var newauth = {};
+        this.props.navigation.navigate("NewAuthorization", newauth);
+        //alert(payload);
+
 
     };
 
