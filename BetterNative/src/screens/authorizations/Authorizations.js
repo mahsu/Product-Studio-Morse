@@ -20,6 +20,14 @@ import {
 import QRCodeScanner from "../../components/QRCodeScanner";
 import {endpoint} from '../../util';
 
+const chase = {
+        "institution": "Chase",
+        "icon": require("../../../res/img/jpm.png"),
+        "type": "Advantage Checking",
+        "number": "#339123499",
+        "status": "Pending"
+}
+
 const authorizations = [
     {
         "institution": "Bank of America",
@@ -33,8 +41,9 @@ const authorizations = [
         "icon": require("../../../res/img/hsbc.png"),
         "type": "Savings Plus",
         "number": "#22919235",
-        "status": "Pending"
+        "status": "Approved"
     },
+    chase
 ];
 
 const colors = {
