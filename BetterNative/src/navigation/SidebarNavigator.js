@@ -1,6 +1,6 @@
 import React from "react";
 import {Image, ImageBackground} from "react-native";
-import {Container, Content, Text, List, ListItem} from "native-base";
+import {Container, Content, Text, List, ListItem, Icon} from "native-base";
 import Notifications from "../screens/Notifications.js";
 import Authorizations from "../screens/authorizations/Authorizations.js";
 import AuthorizationScanner from "../screens/authorizations/AuthorizationScanner";
@@ -14,18 +14,49 @@ import QRCodeTest from "../screens/test/QRCodeTest";
 
 import {DrawerNavigator, StackNavigator} from "react-navigation";
 
-const routes = ["Notifications", "Authorizations", "NewAuthorization", "Wallet", "Profile", "Settings","QRCodeTest","CameraTest"/*, "Logout"*/];
+const routes = [
+    {
+        "name": "Authorizations",
+        "icon": "ios-notifications"
+    },
+    {
+        "name": "Wallet",
+        "icon": "ios-card"
+    },
+    {
+        "name": "Profile",
+        "icon": "ios-person"
+    },
+    {
+        "name": "Settings",
+        "icon": "ios-cog"
+    },
+    {
+        "name": "QRCodeTest",
+        "icon": "contract"
+    },
+    {
+        "name": "CameraTest",
+        "icon": "contract"
+    },
+    {
+        "name": "NewAuthorization",
+        "icon": "contract"
+    }/*,
+    {
+        "name": "Logout",
+        "icon": "wallet"
+    }*/
+];
 
 class Sidebar extends React.Component {
 
     render() {
         return (
             <Container>
-                <Content>
+                <Content style={{backgroundColor:"rgb(82,96,113)"}}>
                     <ImageBackground
-                        source={{
-                            uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/drawer-cover.png?raw=true"
-                        }}
+                        source={require('../../res/img/city.png')}
                         style={{
                             height: 120,
                             alignSelf: "stretch",
@@ -34,19 +65,18 @@ class Sidebar extends React.Component {
                         }}>
                     <Image
                         square
-                        style={{height: 80, width: 70}}
-                        source={{
-                            uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/blob/master/img/logo.png?raw=true"
-                        }}/>
+                        style={{height: 80, width: 80}}
+                        source={require('../../res/img/morse.png')}/>
                     </ImageBackground>
                     <List
                         dataArray={routes}
                         renderRow={data => {
                             return (
                                 <ListItem
+                                    style={{backgroundColor:"rgb(82,96,113)"}}
                                     button
-                                    onPress={() => this.props.navigation.navigate(data)}>
-                                    <Text>{data}</Text>
+                                    onPress={() => this.props.navigation.navigate(data.name)}>
+                                    <Text style={{color:"#bac2c6"}}><Icon name={data.icon} style={{fontSize:15, color:"#bac2c6"}} />  {data.name}</Text>
                                 </ListItem>
                             );
                         }}
