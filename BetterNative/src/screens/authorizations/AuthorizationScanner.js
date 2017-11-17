@@ -27,11 +27,17 @@ export default class AuthorizationScanner extends React.Component {
         super(props);
     }
 
+    componentWillMount() {
+        this.setState({scanned: false});
+    }
+
     onBarCodeRead = (data, bounds) => {
-        console.log(data,bounds);
-        alert(JSON.stringify(data));
-        this.props.navigation.goBack();
-        console.log("going back");
+        if (!this.state.scanned) {
+            console.log(data, bounds);
+            alert(JSON.stringify(data));
+            this.setState({scanned: true});
+            this.props.navigation.goBack();
+        }
     };
 
     render() {
