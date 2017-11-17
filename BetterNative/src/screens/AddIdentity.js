@@ -26,7 +26,7 @@ export default class Profile extends React.Component {
                 </Left>
 
                 <Body>
-                    <Title>Profile</Title>
+                    <Title>Add Identity Doc</Title>
                 </Body>
                 
                 <Right></Right>

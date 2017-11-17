@@ -98,19 +98,7 @@ export default class Profile extends React.Component {
                 
                 <Right>
                     <Button transparent onPress={() => navigation.navigate("AddIdentity")}>
-                        
-                    <Form>
-                        <Picker
-                          mode="dropdown"
-                          placeholder="+"
-                          /*selectedValue={this.state.whatever}*/
-                          onValueChange={(key) => alert("show camera here")}
-                        >
-                            {IdTypes.map((IdType, index) =>  {
-                                return <Item label={IdType.type} value={IdType.type} key={index} />
-                            })}
-                        </Picker>
-                    </Form>
+                        <Text>Add</Text>
                     </Button>
                 </Right>
             </Header>
