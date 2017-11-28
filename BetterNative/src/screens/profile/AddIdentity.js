@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Platform} from 'react-native';
 import {Button, Container, Header, Content, Form, Item, Input, Left, Icon, Body, Right, Title, Card, CardItem, Row, Col, Picker, Label} from "native-base";
 
 const IdTypes = [
@@ -67,8 +67,16 @@ export default class Profile extends React.Component {
         var stateForm = (
             <Row><Col>
                 <Item>
-                    <Label>Photo</Label>
-                    <Button primary onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Text>Photo ID</Text></Button>
+                    <Label>Front of ID</Label>
+                    <Button light onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Icon name="ios-camera"/></Button>
+                </Item>
+                <Item>
+                    <Label>Back of ID</Label>
+                    <Button light onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Icon name="ios-camera"/></Button>
+                </Item>
+                <Item>
+                    <Label>ID with Face</Label>
+                    <Button light onPress={() => {this.props.navigation.navigate("IdentityCamera")}}><Icon name="ios-camera"/></Button>
                 </Item>
 
                 <Item>
@@ -78,6 +86,7 @@ export default class Profile extends React.Component {
                         placeholder="State"
                         selectedValue={this.state.state}
                         onValueChange={this.onStateSelect.bind(this)}
+                        style={{ width:(Platform.OS === 'ios') ? undefined : 240 }}
                     >
                         {states.map((state, index) =>  {
                             return <Item label={state} value={state} key={index} />
@@ -117,6 +126,7 @@ export default class Profile extends React.Component {
                             <Picker
                                 mode="dropdown"
                                 placeholder="Select One"
+                                style={{ width:(Platform.OS === 'ios') ? undefined : 240 }}
                                 selectedValue={this.state.selectedIdType}
                                 onValueChange={this.onIdTypeSelect.bind(this)}
                             >
