@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
-import logo from './images/betterment-logo-blue.png';
-import './bootstrap.min.css';
+import logo from './images/chasebank-logo.svg';
+import morseLogo from './images/morsetrans.png';
+import './css/bootstrap.min.css';
+import './css/open-iconic-bootstrap.min.css'
 
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 var QRCode = require('qrcode.react');
 
 class App extends Component {
   state = {
-    users: [],
+    isSigningUp: false
   };
+
+  showSignupForm = (e) => {
+    this.setState({isSigningUp: true});
+  }
+
+  hideSignupForm = (e) => {
+    this.setState({isSigningUp: false});
+  }
   
   render() {
     return (
@@ -16,15 +27,50 @@ class App extends Component {
         <AppHeader />
 
         <div className="container">
-            <div className="row">
-              <div className="col-4">
-                <NewCustomerQR />
-                <QRResponseStub />
-              </div>
-              <div className="col-8">
-                <UserForm />
+          <div className="row">
+            <div className="col-12">
+              <h2>Welcome to Chase.com!</h2>
+              <p>We've got all sorts of accounts that you can sign up for to make you better at being you. Low rates, awesome customer service, Chase Bank is the best!</p>
+              <p>&nbsp;</p>
+
+              <div className="row">
+                <div className="col-4 title-page-icon">
+                  <p><span class="oi oi-credit-card" title="icon name" aria-hidden="true"></span></p>
+                  <h3>Credit Cards</h3>
+                  <ul className="list-unstyled">
+                    <li>Low Rates</li>
+                    <li>Approval for Everyone</li>
+                  </ul>
+                   
+                  <Button color="primary" block>Open a new Credit Card</Button>
+                </div>
+
+                <div className="col-4 title-page-icon">
+                  <p><span class="oi oi-lock-locked" title="icon name" aria-hidden="true"></span></p>
+                  <h3>Savings Accounts</h3>
+                  <ul className="list-unstyled">
+                    <li>Low Fees</li>
+                    <li>Your Money is Safe</li>
+                  </ul>
+                  
+                  <button class="btn btn-primary btn-block">Open a new Savings Account</button>
+                </div>
+
+                <div className="col-4 title-page-icon">
+                  <p><span class="oi oi-dollar" title="icon name" aria-hidden="true"></span></p>
+                  <h3>Checking Accounts</h3>
+                  <ul className="list-unstyled">
+                    <li>Free checkbooks</li>
+                    <li>Sign up online</li>
+                  </ul>
+                  
+                  <button class="btn btn-primary btn-block" onClick={this.showSignupForm}>Open a new Checking Account</button>
+                </div>
               </div>
             </div>
+          </div>
+
+          {this.state.isSigningUp ? <SignUpForm cancelCallback={this.hideSignupForm} /> : null}
         </div>
       </div>
     );
@@ -35,20 +81,57 @@ class AppHeader extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a className="navbar-brand" href="#">CHASE Onboarding</a>
-
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Logout</a>
-            </li>
-          </ul>
-        </div>
+        <a className="navbar-brand logo mx-auto" href="#" >
+          <img src={logo} />
+        </a>
       </nav>
     )
+  }
+}
+
+class SignUpForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false
+    };
+  }
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
+  morseReceived = () => {
+    this.toggle();
+  }
+
+  render() {
+    return (
+            <div className="row signUpPage justify-content-center fixed-top">
+              <div className="col-6">
+                <h3>New Checking Account <small class="text-muted float-sm-right" style={{cursor:"pointer"}} onClick={this.props.cancelCallback}>Cancel</small></h3>
+                <p>Please enter your personal information in the form below and we will review your checking account for approval. Alternatively, sign up with Morse for accelerated approval</p>
+
+                <UserForm responseReceivedCallback={this.morseReceived} />
+
+                <button type="submit" className="btn btn-primary float-sm-right">Submit</button>
+                <button type="submit" className="btn btn-outline-danger" onClick={this.toggle}><img src={morseLogo} height="20px" style={{verticalAlign:"-4px"}} /> Sign Up With Morse</button>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                  <ModalHeader toggle={this.toggle}><img src={morseLogo} height="50px" style={{verticalAlign:"middle"}}  />Sign Up With Morse</ModalHeader>
+                  <ModalBody style={{textAlign:"center"}}>
+                    <NewCustomerQR />
+                  </ModalBody>
+                  <ModalFooter>
+                    <QRResponseStub />
+                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                  </ModalFooter>
+                </Modal>
+              </div>
+            </div>
+            );
   }
 }
 
@@ -140,6 +223,8 @@ class UserForm extends Component {
           this.setState({
             "customer": data.customer
           });
+
+          this.props.responseReceivedCallback();
         }
 
         // Otherwise, look for a customer in 2ish seconds
@@ -173,9 +258,6 @@ class UserForm extends Component {
           <FormGroupInput value={this.state.customer.address.state} label="State" size='4' />
           <FormGroupInput value={this.state.customer.address.zip} label="Zip" size='2' />
         </div>
-        
-        {/* removing submit button for now */}
-        {/*<button type="submit" className="btn btn-primary">Submit</button>*/}
       </form>
     )
   }
