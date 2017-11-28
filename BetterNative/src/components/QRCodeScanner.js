@@ -40,7 +40,7 @@ export default class QRCodeScanner extends Component {
                         this.camera = cam;
                     }}
                     onBarCodeRead={this.barcodeHandler}
-                    barCodeTypes={['qr']}
+                    barCodeTypes={[Camera.constants.BarCodeType.qr]}
                     style={styles.preview}
                     aspect={Camera.constants.Aspect.fill}>
                 </Camera>
